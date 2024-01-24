@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "740971362749",
+    "project_id": "sparringpartner-371ec",
+    "storage_bucket": "sparringpartner-371ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740971362749:android:1441677a7c85e384c43ad4",
+        "android_client_info": {
+          "package_name": "com.example.sparing_partners"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmPyMmSCZl2zW1Hg2XA85cwVUl-Ti9iZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
