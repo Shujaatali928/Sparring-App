@@ -16,7 +16,7 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
-  TextEditingController _searchbartextcontroller = TextEditingController();
+  final TextEditingController _searchbartextcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

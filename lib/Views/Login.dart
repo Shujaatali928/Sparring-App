@@ -13,8 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailtextcontroller = TextEditingController();
-  TextEditingController _passtextcontroller = TextEditingController();
+  final TextEditingController _emailtextcontroller = TextEditingController();
+  final TextEditingController _passtextcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               buttonname: "Login",
               ontap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => homepage()));
+                    MaterialPageRoute(builder: (context) => const homepage()));
               },
             ),
             Padding(
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
               child: InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUp()));
+                      MaterialPageRoute(builder: (context) => const SignUp()));
                 },
                 child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -4,14 +4,15 @@ import 'package:sparing_partners/routes/RoutesName.dart';
 
 import 'routes/Routes.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
-    print("Initializing Firebase");
-    await Firebase.initializeApp();
-  } catch (e) {
-    print("Error initializing Firebase: $e");
-  }
+  await Firebase.initializeApp();
+  // try {
+  //   print("Initializing Firebase");
+  //   await Firebase.initializeApp();
+  // } catch (e) {
+  //   print("Error initializing Firebase: $e");
+  // }
 
   runApp(const MyApp());
 }

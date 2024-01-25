@@ -20,10 +20,10 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController _fullnametextcontroller = TextEditingController();
-    TextEditingController _emailtextcontroller = TextEditingController();
-    TextEditingController _passwordtextcontroller = TextEditingController();
-    TextEditingController _confirmpasstextcontroller = TextEditingController();
+    TextEditingController fullnametextcontroller = TextEditingController();
+    TextEditingController emailtextcontroller = TextEditingController();
+    TextEditingController passwordtextcontroller = TextEditingController();
+    TextEditingController confirmpasstextcontroller = TextEditingController();
     // bool? radioButtonValue = false;
 
     return SafeArea(
@@ -40,28 +40,28 @@ class _SignUpState extends State<SignUp> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             // ProfileImagePicker(),
             CTextField(
-                controller: _fullnametextcontroller,
+                controller: fullnametextcontroller,
                 labelText: "Full Name",
                 onChanged: (value) {
                   print('Full Name: $value');
                 },
                 hide: false),
             CTextField(
-                controller: _emailtextcontroller,
+                controller: emailtextcontroller,
                 labelText: "Email",
                 onChanged: (value) {
                   print('Email: $value');
                 },
                 hide: false),
             CTextField(
-                controller: _passwordtextcontroller,
+                controller: passwordtextcontroller,
                 labelText: "Password",
                 onChanged: (value) {
                   print('Password: $value');
                 },
                 hide: false),
             CTextField(
-                controller: _confirmpasstextcontroller,
+                controller: confirmpasstextcontroller,
                 labelText: "Confirm Password",
                 onChanged: (value) {
                   print('Confirm Password: $value');
@@ -145,13 +145,13 @@ class _SignUpState extends State<SignUp> {
                     print('Creating Account');
                     FirebaseAuth.instance
                         .createUserWithEmailAndPassword(
-                            email: _emailtextcontroller.text,
-                            password: _passwordtextcontroller.text)
+                            email: emailtextcontroller.text,
+                            password: passwordtextcontroller.text)
                         .then((value) => {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => homepage()))
+                                      builder: (context) => const homepage()))
                             })
                         // ignore: body_might_complete_normally_catch_error
                         .catchError((error, stackTrace) {
@@ -164,7 +164,7 @@ class _SignUpState extends State<SignUp> {
               child: InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
+                      MaterialPageRoute(builder: (context) => const LoginPage()));
                 },
                 child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
