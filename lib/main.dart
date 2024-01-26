@@ -1,18 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sparing_partners/firebase_options.dart';
 import 'package:sparing_partners/routes/RoutesName.dart';
 
 import 'routes/Routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
-    print("Initializing Firebase");
-    await Firebase.initializeApp();
-  } catch (e) {
-    print("Error initializing Firebase: $e");
-  }
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

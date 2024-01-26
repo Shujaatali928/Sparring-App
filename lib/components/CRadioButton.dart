@@ -5,7 +5,7 @@ class LabeledRadio extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
 
-  LabeledRadio({
+  const LabeledRadio({super.key, 
     required this.label,
     required this.value,
     required this.onChanged,
@@ -20,7 +20,7 @@ class LabeledRadio extends StatelessWidget {
       child: Row(
         children: [
           CustomRadioButton(value: value, onChanged: onChanged),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Text(label),
         ],
       ),
@@ -32,7 +32,7 @@ class CustomRadioButton extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
 
-  CustomRadioButton({
+  const CustomRadioButton({super.key, 
     required this.value,
     required this.onChanged,
   });
