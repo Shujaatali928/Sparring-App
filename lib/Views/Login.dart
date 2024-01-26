@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sparing_partners/Views/CreateAccount.dart';
 import 'package:sparing_partners/Views/HomePage.dart';
 import 'package:sparing_partners/components/button.dart';
@@ -46,22 +47,35 @@ class _LoginPageState extends State<LoginPage> {
               hide: false,
               labelText: "User Name",
               onChanged: (value) {
-                print('Username: $value');
+                setState(() {});
               },
             ),
             CTextField(
               controller: _passtextcontroller,
               hide: true,
               labelText: "Password",
-              onChanged: (value) {
-                print('Password: $value');
-              },
+              onChanged: (value) {},
             ),
             Button(
               buttonname: "Login",
               ontap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const homepage()));
+                if (_emailtextcontroller.text.isEmpty ||
+                    _passtextcontroller.text.isEmpty) {
+                  Fluttertoast.showToast(
+                      msg: "Fill All Field Or Don't Have Account? Signup Below",
+                      backgroundColor: appcolors.orangeColor);
+                } else if (_emailtextcontroller.text !=
+                        "shujaat.ali928@gmail.com" ||
+                    _passtextcontroller.text != "shujaat") {
+                  Fluttertoast.showToast(
+                      msg: "Invalid Email Or Password",
+                      backgroundColor: appcolors.orangeColor);
+                } else {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const homepage()));
+                }
               },
             ),
             Padding(

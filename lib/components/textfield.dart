@@ -81,6 +81,7 @@ class _CWtextfieldState extends State<CWtextfield> {
               onChanged: widget.onChanged,
               obscureText: widget.hide,
               decoration: InputDecoration(
+                  fillColor: appcolors.textColorwhite,
                   border: InputBorder.none,
                   hintText: widget.labelText,
                   hintStyle: const TextStyle(
