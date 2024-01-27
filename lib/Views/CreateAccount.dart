@@ -27,6 +27,7 @@ class _SignUpState extends State<SignUp> {
     TextEditingController confirmpasstextcontroller = TextEditingController();
     TextEditingController locationtextcontroller = TextEditingController();
 
+    FirebaseAuth _auth = FirebaseAuth.instance;
     // bool? radioButtonValue = false;
 
     return SafeArea(
@@ -142,7 +143,6 @@ class _SignUpState extends State<SignUp> {
               child: Button(
                   buttonname: "Create Account",
                   ontap: () {
-                    // Fluttertoast.showToast(msg: "Showing Toast");
                     if (fullnametextcontroller.text.isEmpty ||
                         emailtextcontroller.text.isEmpty ||
                         passwordtextcontroller.text.isEmpty ||
@@ -152,17 +152,17 @@ class _SignUpState extends State<SignUp> {
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: appcolors.orangeColor);
-                    } else if (passwordtextcontroller !=
-                        confirmpasstextcontroller) {
+                    } else if (passwordtextcontroller.text !=
+                        confirmpasstextcontroller.text) {
                       Fluttertoast.showToast(
                           msg: "Password Not Same",
                           backgroundColor: appcolors.orangeColor);
                     } else {
-                      print('Creating Account');
-                      FirebaseAuth.instance
+                      debugPrint('Creating Account');
+                      _auth
                           .createUserWithEmailAndPassword(
-                              email: emailtextcontroller.text,
-                              password: passwordtextcontroller.text)
+                              email: emailtextcontroller.text.toString(),
+                              password: passwordtextcontroller.text.toString())
                           .then((value) => {
                                 Navigator.push(
                                     context,
@@ -171,7 +171,7 @@ class _SignUpState extends State<SignUp> {
                               })
                           // ignore: body_might_complete_normally_catch_error
                           .catchError((error, stackTrace) {
-                        print("Error: ${error.toString()}");
+                        debugPrint("Error: ${error.toString()}");
                       });
                     }
                   }),

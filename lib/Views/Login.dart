@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sparing_partners/Views/CreateAccount.dart';
@@ -16,6 +17,30 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailtextcontroller = TextEditingController();
   final TextEditingController _passtextcontroller = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+
+  void login() {
+    _auth
+        .signInWithEmailAndPassword(
+            email: _emailtextcontroller.text,
+            password: _passtextcontroller.text)
+        .then((value) {
+      Fluttertoast.showToast(
+          msg: "Successful Login",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.greenAccent);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const homepage()));
+    }).onError((error, stackTrace) {
+      Fluttertoast.showToast(
+          msg: error.toString(),
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: appcolors.orangeColor);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,17 +89,8 @@ class _LoginPageState extends State<LoginPage> {
                   Fluttertoast.showToast(
                       msg: "Fill All Field Or Don't Have Account? Signup Below",
                       backgroundColor: appcolors.orangeColor);
-                } else if (_emailtextcontroller.text !=
-                        "shujaat.ali928@gmail.com" ||
-                    _passtextcontroller.text != "shujaat") {
-                  Fluttertoast.showToast(
-                      msg: "Invalid Email Or Password",
-                      backgroundColor: appcolors.orangeColor);
                 } else {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const homepage()));
+                  login();
                 }
               },
             ),
