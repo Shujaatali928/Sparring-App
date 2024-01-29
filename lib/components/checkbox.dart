@@ -3,8 +3,9 @@ import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
 
 class CcheckBox extends StatefulWidget {
-  const CcheckBox({super.key, required this.label});
+  const CcheckBox({super.key, required this.label, required this.onChanged});
   final String label;
+  final ValueChanged<bool> onChanged;
 
   @override
   State<CcheckBox> createState() => _CcheckBoxState();
@@ -23,6 +24,7 @@ class _CcheckBoxState extends State<CcheckBox> {
           onChanged: (value) {
             setState(() {
               isChecked = value!;
+              widget.onChanged(value);
             });
           },
         ),

@@ -1,12 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sparing_partners/Views/Bxinglist.dart';
 import 'package:sparing_partners/Views/Jiulist.dart';
+import 'package:sparing_partners/Views/Login.dart';
 import 'package:sparing_partners/Views/MMAlist.dart';
 import 'package:sparing_partners/Views/Muaylist.dart';
 import 'package:sparing_partners/Views/WrestlingList.dart';
 import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
+// import 'package:sparing_partners/components/firebasefetchdata.dart';
 import 'package:sparing_partners/components/textfield.dart';
 
 class homepage extends StatefulWidget {
@@ -19,8 +24,18 @@ class homepage extends StatefulWidget {
 class _homepageState extends State<homepage> {
   final TextEditingController _searchbartextcontroller =
       TextEditingController();
+  final auth = FirebaseAuth.instance;
+  DocumentReference userName = FirebaseFirestore.instance
+      .collection('Users')
+      .doc(FirebaseAuth.instance.currentUser!.uid);
+
+  String fullName = '';
   @override
   Widget build(BuildContext context) {
+    userName.get().then((DocumentSnapshot ds) {
+      fullName = ds['fullName'];
+      print(fullName);
+    });
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
@@ -42,9 +57,38 @@ class _homepageState extends State<homepage> {
                 ),
                 Column(
                   children: [
-                    const SizedBox(
-                      height: 150,
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.account_circle_outlined,
+                              color: appcolors.textColorwhite,
+                            )),
+                        Ctext(
+                            data: fullName.toString(),
+                            color: appcolors.textColorwhite),
+                        IconButton(
+                            onPressed: () {
+                              auth.signOut().then((value) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()));
+                              }).onError((error, stackTrace) {
+                                Fluttertoast.showToast(msg: error.toString());
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.logout_outlined,
+                              color: appcolors.textColorwhite,
+                            )),
+                      ],
                     ),
+                    const SizedBox(height: 70),
                     const Center(
                       child: Ctext(
                           data: "Find A Sparring Partner Now",
@@ -54,7 +98,7 @@ class _homepageState extends State<homepage> {
                         controller: _searchbartextcontroller,
                         labelText: 'Search',
                         onChanged: (value) {
-                          print('Search: $value');
+                          debugPrint('Search: $value');
                         },
                         hide: false),
                   ],

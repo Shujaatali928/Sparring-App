@@ -1,0 +1,33 @@
+// {
+                  //   if (fullnametextcontroller.text.isEmpty ||
+                  //       emailtextcontroller.text.isEmpty ||
+                  //       passwordtextcontroller.text.isEmpty ||
+                  //       confirmpasstextcontroller.text.isEmpty) {
+                  //     Fluttertoast.showToast(
+                  //         msg: "Please Fill All Fields",
+                  //         toastLength: Toast.LENGTH_LONG,
+                  //         gravity: ToastGravity.BOTTOM,
+                  //         backgroundColor: appcolors.orangeColor);
+                  //   } else if (passwordtextcontroller.text !=
+                  //       confirmpasstextcontroller.text) {
+                  //     Fluttertoast.showToast(
+                  //         msg: "Password Not Same",
+                  //         backgroundColor: appcolors.orangeColor);
+                  //   } else {
+                  //     debugPrint('Creating Account');
+                  //     _auth
+                  //         .createUserWithEmailAndPassword(
+                  //             email: emailtextcontroller.text.toString(),
+                  //             password: passwordtextcontroller.text.toString())
+                  //         .then((value) => {
+                  //               Navigator.push(
+                  //                   context,
+                  //                   MaterialPageRoute(
+                  //                       builder: (context) => const homepage()))
+                  //             })
+                  //         // ignore: body_might_complete_normally_catch_error
+                  //         .catchError((error, stackTrace) {
+                  //       debugPrint("Error: ${error.toString()}");
+                  //     });
+                  //   }
+                  // }
