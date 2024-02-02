@@ -8,6 +8,7 @@ import 'package:sparing_partners/Views/Jiulist.dart';
 import 'package:sparing_partners/Views/Login.dart';
 import 'package:sparing_partners/Views/MMAlist.dart';
 import 'package:sparing_partners/Views/Muaylist.dart';
+import 'package:sparing_partners/Views/PlayerProfile.dart';
 import 'package:sparing_partners/Views/WrestlingList.dart';
 import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
@@ -36,6 +37,8 @@ class _homepageState extends State<homepage> {
       fullName = ds['fullName'];
       print(fullName);
     });
+    var uid = userName.id;
+    debugPrint("Homeuid: ${uid}");
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
@@ -62,7 +65,13 @@ class _homepageState extends State<homepage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          PlayerProfile(uid: uid)));
+                            },
                             icon: const Icon(
                               Icons.account_circle_outlined,
                               color: appcolors.textColorwhite,
