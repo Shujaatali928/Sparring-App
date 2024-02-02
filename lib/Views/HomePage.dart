@@ -32,11 +32,18 @@ class _homepageState extends State<homepage> {
 
   String fullName = '';
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     userName.get().then((DocumentSnapshot ds) {
-      fullName = ds['fullName'];
-      print(fullName);
+      setState(() {
+        fullName = ds['fullName'];
+        print(fullName);
+      });
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var uid = userName.id;
     debugPrint("Homeuid: ${uid}");
     return WillPopScope(
@@ -76,9 +83,7 @@ class _homepageState extends State<homepage> {
                               Icons.account_circle_outlined,
                               color: appcolors.textColorwhite,
                             )),
-                        Ctext(
-                            data: fullName.toString(),
-                            color: appcolors.textColorwhite),
+                        Ctext(data: fullName, color: appcolors.textColorwhite),
                         IconButton(
                             onPressed: () {
                               auth.signOut().then((value) {
