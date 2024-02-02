@@ -1,33 +1,300 @@
-// {
-                  //   if (fullnametextcontroller.text.isEmpty ||
-                  //       emailtextcontroller.text.isEmpty ||
-                  //       passwordtextcontroller.text.isEmpty ||
-                  //       confirmpasstextcontroller.text.isEmpty) {
-                  //     Fluttertoast.showToast(
-                  //         msg: "Please Fill All Fields",
-                  //         toastLength: Toast.LENGTH_LONG,
-                  //         gravity: ToastGravity.BOTTOM,
-                  //         backgroundColor: appcolors.orangeColor);
-                  //   } else if (passwordtextcontroller.text !=
-                  //       confirmpasstextcontroller.text) {
-                  //     Fluttertoast.showToast(
-                  //         msg: "Password Not Same",
-                  //         backgroundColor: appcolors.orangeColor);
-                  //   } else {
-                  //     debugPrint('Creating Account');
-                  //     _auth
-                  //         .createUserWithEmailAndPassword(
-                  //             email: emailtextcontroller.text.toString(),
-                  //             password: passwordtextcontroller.text.toString())
-                  //         .then((value) => {
-                  //               Navigator.push(
-                  //                   context,
-                  //                   MaterialPageRoute(
-                  //                       builder: (context) => const homepage()))
-                  //             })
-                  //         // ignore: body_might_complete_normally_catch_error
-                  //         .catchError((error, stackTrace) {
-                  //       debugPrint("Error: ${error.toString()}");
-                  //     });
-                  //   }
-                  // }
+// Column(
+//     children: [
+//       Expanded(
+//         child: Stack(
+//           children: [
+//             Container(
+//               color: appcolors.orangeColor,
+//               height: 125,
+//             ),
+//             Positioned(
+//               left: 100,
+//               right: 100,
+//               top: 50,
+//               child: Column(
+//                 children: [
+//                   const CircleAvatar(
+//                     radius: 80,
+//                     backgroundImage:
+//                         AssetImage('lib/Asset/img/muhammadali.png'),
+//                   ),
+//                   CTextBold(
+//                     data: fullName,
+//                     color: appcolors.textColorblack,
+//                   ),
+//                   const Ctext(
+//                       data: 'Light Sparring',
+//                       color: appcolors.textColorblack),
+//                   Ctext(
+//                       data: location,
+//                       color: appcolors.textColorblack),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//       Padding(
+//         padding: const EdgeInsets.all(15.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             //Experience
+//             const CTextBold(data: 'EXPERIENCE LEVEL'),
+//             const SizedBox(height: 10),
+//             Row(
+//               children: [
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     bigenner
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: 'Beginner',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 )),
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     intermediate
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: 'Intermediate',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 ))
+//               ],
+//             ),
+//             const SizedBox(height: 10),
+//             Row(
+//               children: [
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     advance
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: 'Advanced',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 )),
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     professional
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: 'Professional',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 ))
+//               ],
+//             ),
+//             const Padding(
+//               padding: EdgeInsets.symmetric(horizontal: 15.0),
+//               child: Divider(
+//                 height: 20,
+//                 color: appcolors.textColorblack,
+//               ),
+//             ),
+
+//             //Age
+//             const CTextBold(data: 'AGE'),
+//             const SizedBox(height: 10),
+//             Row(
+//               children: [
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     under18
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: '18 & Under',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 )),
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     above19
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: '19 - 30',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 ))
+//               ],
+//             ),
+//             const SizedBox(height: 10),
+//             Row(
+//               children: [
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     above30
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: '30 - 39',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 )),
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     above40
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: '40 & UP',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 ))
+//               ],
+//             ),
+//             const Padding(
+//               padding: EdgeInsets.symmetric(horizontal: 15.0),
+//               child: Divider(
+//                 height: 20,
+//                 color: appcolors.textColorblack,
+//               ),
+//             ),
+
+//             // Sex
+//             const CTextBold(data: 'SEX'),
+//             const SizedBox(height: 10),
+//             Row(
+//               children: [
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     male
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: 'Male',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 )),
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     female
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: 'Female',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 )),
+//                 Expanded(
+//                     child: Row(
+//                   children: [
+//                     other
+//                         ? const Icon(Icons.thumb_up_outlined,
+//                             color: appcolors.orangeColor)
+//                         : const Icon(Icons.thumb_down_outlined,
+//                             color: appcolors.textColorblack),
+//                     const SizedBox(width: 5),
+//                     const Ctext(
+//                         data: 'Others',
+//                         color: appcolors.textColorblack)
+//                   ],
+//                 )),
+//                 const Divider(
+//                   height: 1,
+//                   color: appcolors.textColorblack,
+//                 )
+//               ],
+//             ),
+//             const Padding(
+//               padding: EdgeInsets.symmetric(horizontal: 15.0),
+//               child: Divider(
+//                 height: 20,
+//                 color: appcolors.textColorblack,
+//               ),
+//             ),
+//             // Weight Class
+//             const CTextBold(data: 'WEIGHT CLASS'),
+//             const SizedBox(height: 10),
+//             const Row(
+//               children: [
+//                 Icon(Icons.thumb_up_outlined,
+//                     color: appcolors.orangeColor),
+//                 SizedBox(width: 5),
+//                 Ctext(
+//                     data: '100 - 120LBS / 45.4 - 54.4KGS',
+//                     color: appcolors.textColorblack)
+//               ],
+//             ),
+//             const SizedBox(height: 10),
+//             const Row(
+//               children: [
+//                 Icon(Icons.thumb_up_outlined,
+//                     color: appcolors.orangeColor),
+//                 SizedBox(width: 5),
+//                 Ctext(
+//                     data: '140 - 160LBS / 64 - 73KGS',
+//                     color: appcolors.textColorblack)
+//               ],
+//             ),
+//             const SizedBox(height: 10),
+//             const Row(
+//               children: [
+//                 Icon(Icons.thumb_up_outlined,
+//                     color: appcolors.orangeColor),
+//                 SizedBox(width: 5),
+//                 Ctext(
+//                     data: '160 - 180LBS / 73 - 82KGS',
+//                     color: appcolors.textColorblack)
+//               ],
+//             ),
+//             const Padding(
+//               padding: EdgeInsets.symmetric(horizontal: 15),
+//               child: Divider(
+//                 height: 20,
+//                 color: appcolors.textColorblack,
+//               ),
+//             ),
+//           ],
+//         ),
+//       )
+//     ],
+//   );
