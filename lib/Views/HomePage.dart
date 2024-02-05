@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sparing_partners/Views/Bxinglist.dart';
+import 'package:sparing_partners/Views/Chatlist.dart';
 import 'package:sparing_partners/Views/Jiulist.dart';
 import 'package:sparing_partners/Views/Login.dart';
 import 'package:sparing_partners/Views/MMAlist.dart';
@@ -12,7 +13,6 @@ import 'package:sparing_partners/Views/PlayerProfile.dart';
 import 'package:sparing_partners/Views/WrestlingList.dart';
 import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
-// import 'package:sparing_partners/components/firebasefetchdata.dart';
 import 'package:sparing_partners/components/textfield.dart';
 
 class homepage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _homepageState extends State<homepage> {
     userName.get().then((DocumentSnapshot ds) {
       setState(() {
         fullName = ds['fullName'];
-        print(fullName);
+        debugPrint(fullName);
       });
     });
   }
@@ -45,7 +45,7 @@ class _homepageState extends State<homepage> {
   @override
   Widget build(BuildContext context) {
     var uid = userName.id;
-    debugPrint("Homeuid: ${uid}");
+    debugPrint("Homeuid: $uid");
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
@@ -71,6 +71,17 @@ class _homepageState extends State<homepage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const ChatList()));
+                            },
+                            icon: const Icon(
+                              Icons.chat_outlined,
+                              color: appcolors.textColorwhite,
+                            )),
                         IconButton(
                             onPressed: () {
                               Navigator.push(

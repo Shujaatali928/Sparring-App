@@ -94,3 +94,52 @@ class _CWtextfieldState extends State<CWtextfield> {
     );
   }
 }
+
+class Mtextfield extends StatefulWidget {
+  const Mtextfield(
+      {super.key,
+      required this.labelText,
+      required this.onChanged,
+      required this.hide,
+      required this.controller});
+  final String labelText;
+  final ValueChanged<String>? onChanged;
+  final bool hide;
+  final TextEditingController controller;
+
+  @override
+  State<Mtextfield> createState() => _MtextfieldState();
+}
+
+class _MtextfieldState extends State<Mtextfield> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Container(
+          width: double.infinity,
+          // height: 43,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 1),
+              borderRadius: BorderRadius.circular(11)),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: TextField(
+              keyboardType: TextInputType.multiline,
+              textCapitalization: TextCapitalization.sentences,
+              maxLines: null,
+              controller: widget.controller,
+              onChanged: widget.onChanged,
+              obscureText: widget.hide,
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: widget.labelText,
+                  hintStyle: const TextStyle(
+                    fontFamily: 'kanit',
+                    fontSize: 18,
+                  )),
+            ),
+          )),
+    );
+  }
+}

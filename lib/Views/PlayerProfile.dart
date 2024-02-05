@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sparing_partners/Models/ChatUsers.dart';
+import 'package:sparing_partners/Views/Chatpage.dart';
 import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
 
 class PlayerProfile extends StatefulWidget {
   const PlayerProfile({super.key, required this.uid});
   final dynamic uid;
+
   @override
   State<PlayerProfile> createState() => _PlayerProfileState();
 }
@@ -35,7 +38,6 @@ class _PlayerProfileState extends State<PlayerProfile> {
               var userData = snapshot.data!.data() as Map<String, dynamic>;
               var fullName = userData['fullName'];
               var location = userData['location'];
-              // var categories = userData['categories'];
               var experience = userData['experienceLevels'];
               bool bigenner =
                   experience != null && experience.contains('Beginner');
@@ -62,12 +64,13 @@ class _PlayerProfileState extends State<PlayerProfile> {
                       children: [
                         Container(
                           color: appcolors.orangeColor,
+                          width: double.infinity,
                           height: 125,
                         ),
                         Positioned(
                           left: 100,
                           right: 100,
-                          top: 50,
+                          top: 25,
                           child: Column(
                             children: [
                               const CircleAvatar(
@@ -79,12 +82,40 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 data: fullName,
                                 color: appcolors.textColorblack,
                               ),
-                              const Ctext(
-                                  data: 'Light Sparring',
-                                  color: appcolors.textColorblack),
                               Ctext(
                                   data: location,
                                   color: appcolors.textColorblack),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: IconButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ChatPage(
+                                                        Chatuser: widget.uid,
+                                                      )));
+                                        },
+                                        icon: const Icon(
+                                          Icons.chat_rounded,
+                                          color: appcolors.orangeColor,
+                                          size: 30,
+                                        )),
+                                  ),
+                                  const SizedBox(width: 50),
+                                  Expanded(
+                                    child: IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.location_on,
+                                          color: appcolors.orangeColor,
+                                          size: 30,
+                                        )),
+                                  )
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -370,7 +401,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
               return Center(child: Text("Error: ${snapshot.error}"));
             }
           }
-          return const Text("Fuck OF!!!"); // Default empty container
+          return const Text(""); // Default empty container
         }),
       ),
     ));
