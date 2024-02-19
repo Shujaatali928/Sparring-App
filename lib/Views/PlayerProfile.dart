@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sparing_partners/Models/ChatUsers.dart';
+// import 'package:sparing_partners/Models/ChatUsers.dart';
 import 'package:sparing_partners/Views/Chatpage.dart';
 import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
@@ -14,6 +14,7 @@ class PlayerProfile extends StatefulWidget {
 }
 
 class _PlayerProfileState extends State<PlayerProfile> {
+  // ChatUser? _chatUser;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,6 +57,16 @@ class _PlayerProfileState extends State<PlayerProfile> {
               bool above19 = age != null && age.contains('19 - 29');
               bool above30 = age != null && age.contains('30 - 39');
               bool above40 = age != null && age.contains('40 & Up');
+              var weight = userData['weightclass'];
+              bool below54 = weight != null &&
+                  weight.contains('100 - 120LBS / 45.4 - 54.4KGS');
+              bool below73 = weight != null &&
+                  weight.contains('140 - 160LBS / 64 - 73KGS');
+              bool below82 = weight != null &&
+                  weight.contains('160 - 180LBS / 73 - 82KGS');
+
+              // ChatUser _chatuser = ChatUser.fromJson(widget.uid);
+              // _chatUser = ChatUser.fromJson(userData);
 
               return Column(
                 children: [
@@ -342,34 +353,42 @@ class _PlayerProfileState extends State<PlayerProfile> {
                         // Weight Class
                         const CTextBold(data: 'WEIGHT CLASS'),
                         const SizedBox(height: 10),
-                        const Row(
+                        Row(
                           children: [
-                            Icon(Icons.thumb_up_outlined,
-                                color: appcolors.orangeColor),
-                            SizedBox(width: 5),
-                            Ctext(
+                            below54
+                                ? const Icon(Icons.thumb_up_outlined,
+                                    color: appcolors.orangeColor)
+                                : const Icon(Icons.thumb_down_outlined,
+                                    color: appcolors.textColorblack),
+                            const Ctext(
                                 data: '100 - 120LBS / 45.4 - 54.4KGS',
                                 color: appcolors.textColorblack)
                           ],
                         ),
                         const SizedBox(height: 10),
-                        const Row(
+                        Row(
                           children: [
-                            Icon(Icons.thumb_up_outlined,
-                                color: appcolors.orangeColor),
-                            SizedBox(width: 5),
-                            Ctext(
+                            below73
+                                ? const Icon(Icons.thumb_up_outlined,
+                                    color: appcolors.orangeColor)
+                                : const Icon(Icons.thumb_down_outlined,
+                                    color: appcolors.textColorblack),
+                            const SizedBox(width: 5),
+                            const Ctext(
                                 data: '140 - 160LBS / 64 - 73KGS',
                                 color: appcolors.textColorblack)
                           ],
                         ),
                         const SizedBox(height: 10),
-                        const Row(
+                        Row(
                           children: [
-                            Icon(Icons.thumb_up_outlined,
-                                color: appcolors.orangeColor),
-                            SizedBox(width: 5),
-                            Ctext(
+                            below82
+                                ? const Icon(Icons.thumb_up_outlined,
+                                    color: appcolors.orangeColor)
+                                : const Icon(Icons.thumb_down_outlined,
+                                    color: appcolors.textColorblack),
+                            const SizedBox(width: 5),
+                            const Ctext(
                                 data: '160 - 180LBS / 73 - 82KGS',
                                 color: appcolors.textColorblack)
                           ],

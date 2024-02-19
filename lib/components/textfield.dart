@@ -33,6 +33,7 @@ class _textfieldState extends State<CTextField> {
             child: TextField(
               controller: widget.controller,
               onChanged: widget.onChanged,
+              textCapitalization: TextCapitalization.sentences,
               obscureText: widget.hide,
               decoration: InputDecoration(
                   border: InputBorder.none,
@@ -79,6 +80,7 @@ class _CWtextfieldState extends State<CWtextfield> {
             child: TextField(
               controller: widget.controller,
               onChanged: widget.onChanged,
+              textCapitalization: TextCapitalization.sentences,
               obscureText: widget.hide,
               decoration: InputDecoration(
                   fillColor: appcolors.textColorwhite,

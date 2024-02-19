@@ -7,11 +7,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sparing_partners/Views/HomePage.dart';
 import 'package:sparing_partners/Views/Login.dart';
 import 'package:sparing_partners/components/button.dart';
-// import 'package:sparing_partners/components/CRadioButton.dart';
 import 'package:sparing_partners/components/checkbox.dart';
 import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
-// import 'package:sparing_partners/components/profile_image_picker.dart';
+import 'package:sparing_partners/components/profile_image_picker.dart';
+
 import 'package:sparing_partners/components/textfield.dart';
 
 class SignUp extends StatefulWidget {
@@ -27,7 +27,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController passwordtextcontroller = TextEditingController();
   TextEditingController confirmpasstextcontroller = TextEditingController();
   TextEditingController locationtextcontroller = TextEditingController();
-  List<bool> checkboxStates = List.filled(16, false);
+  List<bool> checkboxStates = List.filled(19, false);
   final firestore = FirebaseFirestore.instance.collection("Users");
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _SignUpState extends State<SignUp> {
           padding: const EdgeInsets.all(20.0),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            // ProfileImagePicker(),
+            Center(child: ProfileImagePicker()),
             CTextField(
                 controller: fullnametextcontroller,
                 labelText: "Full Name",
@@ -253,6 +253,37 @@ class _SignUpState extends State<SignUp> {
                         })),
               ],
             ),
+            const Padding(
+              padding: EdgeInsets.only(left: 15.0),
+              child: CTextBold(
+                  data: "Weight Class:", color: appcolors.textColorblack),
+            ),
+            Column(
+              children: [
+                CcheckBox(
+                    label: '100 - 120LBS / 45.4 - 54.4KGS',
+                    onChanged: (value) {
+                      setState(() {
+                        checkboxStates[16] = value;
+                      });
+                    }),
+                CcheckBox(
+                  label: '140 - 160LBS / 64 - 73KGS',
+                  onChanged: (value) {
+                    setState(() {
+                      checkboxStates[17] = value;
+                    });
+                  },
+                ),
+                CcheckBox(
+                    label: '160 - 180LBS / 73 - 82KGS',
+                    onChanged: (value) {
+                      setState(() {
+                        checkboxStates[18] = value;
+                      });
+                    }),
+              ],
+            ),
             Center(
                 child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -316,10 +347,19 @@ class _SignUpState extends State<SignUp> {
                         if (checkboxStates[12]) agegroup.add('40 & Up');
 
                         List<String> Sex = [];
-                        // Add selected experience levels to the list
+                        // Add selected Sex to the list
                         if (checkboxStates[13]) Sex.add('Male');
                         if (checkboxStates[14]) Sex.add('Female');
                         if (checkboxStates[15]) Sex.add('Others');
+
+                        List<String> weightclass = [];
+                        // Add selected weight Class to the list
+                        if (checkboxStates[16])
+                          weightclass.add('100 - 120LBS / 45.4 - 54.4KGS');
+                        if (checkboxStates[17])
+                          weightclass.add('140 - 160LBS / 64 - 73KGS');
+                        if (checkboxStates[18])
+                          weightclass.add('160 - 180LBS / 73 - 82KGS');
 
                         // Create a data map with the extracted values
                         Map<String, dynamic> userData = {
@@ -331,6 +371,7 @@ class _SignUpState extends State<SignUp> {
                           'experienceLevels': experienceLevels,
                           'agegroup': agegroup,
                           'Sex': Sex,
+                          'weightclass': weightclass,
                           // Add more fields if needed
                         };
 
