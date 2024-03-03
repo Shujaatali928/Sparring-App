@@ -22,7 +22,7 @@ class APIs {
   // chatsreen related api
   //  useful for getting conversation id
   static String getConversationID(String id) =>
-      user.uid.compareTo(id) <= 0 ? '${user.uid}_${id}' : '${id}_${user.uid}';
+      user.uid.compareTo(id) <= 0 ? '${user.uid}_$id' : '${id}_${user.uid}';
 
 // For getting all messages of a specific conversation from Firestore database
   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllMessages(

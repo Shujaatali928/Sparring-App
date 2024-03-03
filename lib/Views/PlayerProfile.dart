@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sparing_partners/Views/Chatpage.dart';
 import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
+import 'package:sparing_partners/components/map.dart';
 
 class PlayerProfile extends StatefulWidget {
   const PlayerProfile({super.key, required this.uid});
@@ -39,6 +40,17 @@ class _PlayerProfileState extends State<PlayerProfile> {
               var userData = snapshot.data!.data() as Map<String, dynamic>;
               var fullName = userData['fullName'];
               var location = userData['location'];
+              var categories= userData['categories'];
+              bool isBoxing =
+                  categories != null && categories.contains('Boxing');
+              bool isWrestling =
+                  categories != null && categories.contains('Wrestling');
+              bool isMMA =
+                  categories != null && categories.contains('MMA');
+              bool isJiuJitsu =
+                  categories != null && categories.contains('Jiu Jitsu');
+              bool isMuayThai =
+                  categories != null && categories.contains('Muay Thai');
               var experience = userData['experienceLevels'];
               bool bigenner =
                   experience != null && experience.contains('Beginner');
@@ -93,10 +105,26 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 data: fullName,
                                 color: appcolors.textColorblack,
                               ),
-                              Ctext(
-                                  data: location,
-                                  color: appcolors.textColorblack),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [isBoxing? const Ctext(
+                                  data: ('| Boxer |'),
+                                  color: Color.fromARGB(255, 10, 9, 9)): const SizedBox(),
+                              isWrestling? const Ctext(
+                                  data: ('| Wrestler |'),
+                                  color: Color.fromARGB(255, 10, 9, 9)): const SizedBox(),
+                                  isMMA? const Ctext(
+                                  data: ('| MMA |'),
+                                  color: Color.fromARGB(255, 10, 9, 9)): const SizedBox(),
+                                  isMuayThai? const Ctext(
+                                  data: ('| Muay Thai |'),
+                                  color: Color.fromARGB(255, 10, 9, 9)): const SizedBox(),
+                                isJiuJitsu? const Ctext(
+                                  data: ('| Jiu Jitsu |'),
+                                  color: Color.fromARGB(255, 10, 9, 9)): const SizedBox(),
+                                    ],),
+
+                                Row(
                                 children: [
                                   Expanded(
                                     child: IconButton(
@@ -118,7 +146,16 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                   const SizedBox(width: 50),
                                   Expanded(
                                     child: IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          debugPrint(location);
+                                          // debugPrint('latitude: ' + location.latitude);
+                                          // debugPrint('longitude: ' + location);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Staticmap(location: location,)));
+                                        },
                                         icon: const Icon(
                                           Icons.location_on,
                                           color: appcolors.orangeColor,

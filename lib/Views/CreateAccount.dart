@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:sparing_partners/Views/HomePage.dart';
 import 'package:sparing_partners/Views/Login.dart';
 import 'package:sparing_partners/components/button.dart';
@@ -11,7 +12,6 @@ import 'package:sparing_partners/components/checkbox.dart';
 import 'package:sparing_partners/components/colors.dart';
 import 'package:sparing_partners/components/cus_text.dart';
 import 'package:sparing_partners/components/profile_image_picker.dart';
-
 import 'package:sparing_partners/components/textfield.dart';
 
 class SignUp extends StatefulWidget {
@@ -28,7 +28,42 @@ class _SignUpState extends State<SignUp> {
   TextEditingController confirmpasstextcontroller = TextEditingController();
   TextEditingController locationtextcontroller = TextEditingController();
   List<bool> checkboxStates = List.filled(19, false);
+  String? _userLocation;
   final firestore = FirebaseFirestore.instance.collection("Users");
+
+  Future<void> _getUserLocation() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+
+    if (permission == LocationPermission.denied) {
+      // Handle case when user denies location permissions
+      Fluttertoast.showToast(
+        msg: "Please enable location permissions to use this feature.",
+        backgroundColor: appcolors.orangeColor,
+      );
+      return;
+    }
+
+    try {
+      // Get current position
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      // Retrieve latitude and longitude
+      double latitude = position.latitude;
+      double longitude = position.longitude;
+
+      // Update location text field with latitude and longitude
+      setState(() {
+        locationtextcontroller.text = 'Latitude: $latitude, Longitude: $longitude';
+      });
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Error retrieving location: $e",
+        backgroundColor: appcolors.orangeColor,
+      );
+    }
+  }  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,11 +99,24 @@ class _SignUpState extends State<SignUp> {
                 labelText: "Confirm Password",
                 onChanged: (value) {},
                 hide: true),
-            CTextField(
+            Row(children: [
+              Expanded(child: CTextField(
                 controller: locationtextcontroller,
                 labelText: "Location",
                 onChanged: (value) {},
-                hide: false),
+                hide: false,
+                ),),
+              IconButton(icon: const Icon(Icons.location_on, color: appcolors.orangeColor,), onPressed: () {
+                  Fluttertoast.showToast(
+                          msg: "Getting Location",
+                          backgroundColor: appcolors.orangeColor);
+                 _getUserLocation(); 
+                },),
+            ],),
+            
+
+            
+                
             // Categories
             const Padding(
               padding: EdgeInsets.only(left: 15.0),
@@ -367,6 +415,7 @@ class _SignUpState extends State<SignUp> {
                           'fullName': fullName,
                           'email': email,
                           'location': location,
+                          'userlocation' : _userLocation,
                           'categories': categories,
                           'experienceLevels': experienceLevels,
                           'agegroup': agegroup,
